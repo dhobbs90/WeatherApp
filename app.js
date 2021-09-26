@@ -5,6 +5,7 @@ const request = require('request');
 //Constants
 const baseUrl="http://api.weatherstack.com/";
 const mtlCoords="45.5017,-73.5673";
+const jsonSettingsFileName = "appsettings.json";
 
 //variables
 let jsonData;
@@ -13,13 +14,14 @@ let apiCallString;
 
 //read app settings from settings.json. This file is intentionally excluded from git
 try{
-    jsonData = fs.readFileSync('appsettings.json');
+    jsonData = fs.readFileSync(jsonSettingsFileName);
     appSettings = JSON.parse(jsonData);
 }
 catch(e){
-    console.error("ERROR:"+e.errno+" Failed to open "+e.path+" please create it with the following format and store your weatherstack.com api key:\n\
+    console.error("FATAL ERROR: Failed to open "+e.path+" please create it with the following format and store your weatherstack.com api key\n"
+    +process.cwd()+"\\"+jsonSettingsFileName+"\n\
     {\n\
-        apikey:12345676890\n\
+        \"apikey\":\"12345676890\"\n\
     \}\n")
     process.exit(1)
 }
