@@ -17,11 +17,11 @@ try{
     appSettings = JSON.parse(jsonData);
 }
 catch(e){
-    console.log(e)
     console.error("ERROR:"+e.errno+" Failed to open "+e.path+" please create it with the following format and store your weatherstack.com api key:\n\
     {\n\
         apikey:12345676890\n\
     \}\n")
+    process.exit(1)
 }
 
 //build our api call string for weatherstack in the format:
