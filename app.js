@@ -33,5 +33,5 @@ console.log("Api Call: "+apiCallString);
 
 //make our http call to weatherstack.com
 request(apiCallString, {json:true}, (error, response, body) =>{
-    console.log(body.current)
+    console.log("it is currently "+body.current.weather_descriptions[0]+" with a tempature of "+body.current.temperature+" degrees")
 });
