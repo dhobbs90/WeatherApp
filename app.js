@@ -12,7 +12,8 @@ let jsonData;
 let appSettings;
 let apiCallString;
 
-//read app settings from settings.json. This file is intentionally excluded from git
+//read app settings from settings.json. 
+//This file is intentionally excluded from git to hide our weatherstack.com api key
 try{
     jsonData = fs.readFileSync(appSettingsFileName);
     appSettings = JSON.parse(jsonData);
@@ -33,6 +34,7 @@ apiCallString = `${weatherStackUrl}?access_key=${appSettings.apikey}&query=${mtl
 //output http call to console
 console.log(`Api Call: ${apiCallString}`);
 
+//retrieve weather data from api.weatherstack.com
 axios.get(apiCallString)
   .then(function (response) {
     console.log(`it is currently ${response.data.current.weather_descriptions[0]} with a tempature of ${response.data.current.temperature} degrees`)
