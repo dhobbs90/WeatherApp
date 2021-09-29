@@ -1,16 +1,14 @@
 //Imports
 const fs = require('fs');
-const axios = require('axios');
+const forcast = require('./utils/forcast')
 
 //Constants
-const weatherStackUrl="http://api.weatherstack.com/current";
 const mtlCoords="45.5017,-73.5673";
 const appSettingsFileName = "appsettings.json";
 
 //variables
 let jsonData;
 let appSettings;
-let apiCallString;
 
 //read app settings from settings.json. 
 //This file is intentionally excluded from git to hide our weatherstack.com api key
@@ -27,18 +25,7 @@ catch(e){
     process.exit(1)
 }
 
-//build our api call string for weatherstack in the format:
-//http://api.weatherstack.com/current?access_key=1234567890&query=45.5017,-73.5673
-apiCallString = `${weatherStackUrl}?access_key=${appSettings.apikey}&query=${mtlCoords}`;
-
-//output http call to console
-console.log(`Api Call: ${apiCallString}`);
-
-//retrieve weather data from api.weatherstack.com
-axios.get(apiCallString)
-  .then(function (response) {
-    console.log(`it is currently ${response.data.current.weather_descriptions[0]} with a tempature of ${response.data.current.temperature} degrees`)
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+forcast(mtlCoords,appSettings.apikey, (error, data) => {
+  console.log('Error',error)
+  console.log('data',data)
+})
