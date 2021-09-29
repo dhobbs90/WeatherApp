@@ -25,7 +25,7 @@ catch(e){
     process.exit(1)
 }
 
-forcast(mtlCoords,appSettings.apikey, (error, data) => {
+forcast(mtlCoords, appSettings.apikey, (error, data) => {
   console.log('Error',error)
   console.log('data',data)
 })
